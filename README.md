@@ -1,1 +1,1 @@
-# *Zalophus californianus* genome. Peart et al.
+# Hi-C scaffolded short and long-read genome assemblies of the California sea lion are broadly consistent for syntenic inference across 45 million years of evolution

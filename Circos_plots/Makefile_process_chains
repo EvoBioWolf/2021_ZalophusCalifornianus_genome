@@ -1,0 +1,37 @@
+SHELL := /bin/bash
+G1    := mzalCal1pri
+K1    := ${G1:=_karyotype.txt}
+G2    := musPutFur1
+K2    := ${G2:=_karyotype.txt}
+CHAIN := ${G1}.${G2}.syn.chain
+
+################################################
+#### In case of issues saurabhdilip@gmail.com  #
+################################################
+
+All: \
+	$(addprefix F_,${CHAIN}) chain.tab link.txt parallel_link.txt  filtered_link.txt final.bundle
+
+F_%.chain:%.chain
+	#filtering chain
+	./chainFilter -qMinSize=1000 -tMinSize=1000 $< > $@
+chain.tab : $(addprefix F_,${CHAIN}) 
+	#getting tabular chain
+	./hgLoadChain -test canFam3 testtrack $< 
+link.txt : chain.tab
+	#creating links from tabular chain file
+	cat $< |./makelinks -minsize 100 > $@
+parallel_%.txt : link.txt
+	#creating parallel links
+	/clusterhome/peart/circos-0.69-8/bin/circos-tools-0.23/tools/convertlinks/bin/convertlinks -links $< > $@
+filtered_%.txt:linkfilter.pl link.txt  ${K1} ${K2}
+	#filtering links by used chromosome
+	perl $^ > $@
+final.links:filtered_link.txt
+	#creating final parallel links
+	/clusterhome/peart/circos-0.69-8/bin/circos-tools-0.23/tools/convertlinks/bin/convertlinks -links $< > $@
+final.bundle:final.links
+	#bundling links 
+	/clusterhome/peart/circos-0.69-8/bin/circos-tools-0.23/tools/bundlelinks/bin/bundlelinks -min_bundle_membership 3  -links $<  > $@
+clean: 
+	rm -f chain.tab link.txt parallel_link.txt filtered_link.txt final.links final.bundle $(addprefix F_,${CHAIN})

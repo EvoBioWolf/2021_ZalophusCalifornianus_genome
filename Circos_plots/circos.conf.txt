@@ -1,0 +1,52 @@
+karyotype = ./canFam3_karyotype.txt, ./zalCal22n_karyotype.txt
+chromosomes_reverse = NW_020884868.1,NW_020874458.1,NW_020874464.1,NW_020884869.1,NW_020874474.1,NW_020874467.1,NW_020884870.1,NW_020876041.1,NW_020875357.1,NW_020879070.1,NW_020874544.1,NW_020876465.1,NW_020874462.1,NW_020875730.1,NW_020878390.1,NW_020874788.1,NW_020874921.1,NW_020874514.1
+
+
+<links>
+<link>
+file = ./final_with_colours.txt
+radius = 0.95r
+ribbon = yes
+bezier_radius = 0.1r
+thickness = 1
+</link>
+</links>
+
+
+
+
+
+
+<ideogram>
+<spacing>
+default = 0.005r
+</spacing>
+radius = 0.85r
+thickness = 50p
+fill      = yes
+band_transparency = 4
+show_label     = no
+label_radius = 1r + 25p
+label_size     = 20p
+label_color    = black
+label_parallel = no
+
+
+</ideogram>
+
+
+
+
+
+<image>
+# Included from Circos distribution.
+<<include /clusterhome/peart/circos-0.69-8/bin/etc/image.conf>>
+</image>
+
+# RGB/HSV color definitions, color lists, location of fonts, fill patterns.
+# Included from Circos distribution.
+<<include /clusterhome/peart/circos-0.69-8/bin/etc/colors_fonts_patterns.conf>>
+
+# Debugging, I/O an dother system parameters
+# Included from Circos distribution.
+<<include /clusterhome/peart/circos-0.69-8/bin/etc/housekeeping.conf>>
